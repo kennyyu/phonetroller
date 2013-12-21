@@ -1,0 +1,7 @@
+{
+  "author": "Kenny Yu (http://kennyyu.me)",
+  "name" : "phonetroller",
+  "dependencies": {
+    "ws" : ">=0.4.31"
+  }
+}
