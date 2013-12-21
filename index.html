@@ -65,9 +65,9 @@ if (window.DeviceMotionEvent==undefined) {
 
 } else {
 	window.ondevicemotion = function(event) {
-		ax = event.accelerationIncludingGravity.x;
-		ay = event.accelerationIncludingGravity.y;
-		console.log("Accelerometer data - x: " + event.accelerationIncludingGravity.x + " y: " + event.accelerationIncludingGravity.y + " z: " +event.accelerationIncludingGravity.z);
+		ax = event.acceleration.x;
+		ay = event.acceleration.y;
+		console.log("Accelerometer data - x: " + event.acceleration.x + " y: " + event.acceleration.y + " z: " +event.acceleration.z);
 	}
 
 	setInterval(function() {
