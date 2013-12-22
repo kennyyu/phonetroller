@@ -1,8 +1,27 @@
 {
   "author": "Kenny Yu (http://kennyyu.me)",
-  "name" : "phonetroller",
+  "name": "phonetroller",
   "dependencies": {
-    "ws" : ">=0.4.31",
-    "express" : ">=3.4.7"
-  }
+    "ws": ">=0.4.31",
+    "express": ">=3.4.7"
+  },
+  "scripts": {
+    "start": "node server.js"
+  },
+  "readmeFilename": "README.md",
+  "gitHead": "7f8c62bca3c36c7dcd9e39a4d9fb151b32827969",
+  "description": "Phonetroller ============ Using a phone as a controller",
+  "version": "0.0.1",
+  "main": "server.js",
+  "devDependencies": {},
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/kennyyu/phonetroller.git"
+  },
+  "keywords": [
+    "phone",
+    "device",
+    "websocket"
+  ],
+  "license": "MIT"
 }
