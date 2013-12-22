@@ -5,6 +5,8 @@ $(document).ready(function() {
     return;
   }
 
+  // Parses the query string of this URL and extracts the value
+  // for the given variable.
   // taken from: http://stackoverflow.com/questions/2090551/parse-query-string-in-javascript
   function getQueryVariable(variable) {
     var query = window.location.search.substring(1);
@@ -18,13 +20,15 @@ $(document).ready(function() {
     return null;
   }
 
-  // create a websocket connection to send acceleration estimates
+  // extract the token from the query string
   var token = getQueryVariable("token");
   if (token == null) {
     $("#yes").html("NO TOKEN PROVIDED");
     return;
   }
   $("#yes").html("TOKEN PROVIDED: " + token);
+
+  // create a websocket connection to send acceleration estimates
   var host = location.origin.replace(/^http/, 'ws');
   var ws = new WebSocket(host);
   ws.onopen = function() {

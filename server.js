@@ -19,10 +19,12 @@ var server = http.createServer(app);
 server.listen(port);
 console.log("http server listening on port %d", port);
 
+// Class that generates globally unique ids
 var TokenGenerator = function() {
-  this.tokens = {};
+  this.tokens = {}; // acts like a set
 };
 
+// Generate a unique ID
 TokenGenerator.prototype.generate = function() {
   var token;
   do {
@@ -36,18 +38,21 @@ TokenGenerator.prototype.generate = function() {
   return token;
 };
 
+// Frees the ID if it was allocated
 TokenGenerator.prototype.free = function(token) {
   delete this.tokens[token];
 };
 
-var ApplicationManager = function() {
-  // map from token -> object with these fields
-  // 'browser' -> ws
-  // 'device' -> ws
+// Manages all relationships between browser and device websockets.
+// Maintains a map from token -> object with these fields
+// 'browser' -> ws
+// 'device' -> ws
+var ApplicationManager = function(tokenGenerator) {
   this.applications = {};
-  this.tokenGenerator = new TokenGenerator();
+  this.tokenGenerator = tokenGenerator;
 };
 
+// Handles the given message sent from the websocket
 ApplicationManager.prototype.handleMessage = function(ws, message) {
   var data = JSON.parse(message);
   switch (data["type"]) {
@@ -69,6 +74,8 @@ ApplicationManager.prototype.handleMessage = function(ws, message) {
   }
 };
 
+// Cleans up the resources for this token. If onlyDevice is true,
+// this will only cleanup the device with that token.
 ApplicationManager.prototype.cleanupApplication = function(token, onlyDevice) {
   if (token === undefined) {
     return;
@@ -85,9 +92,13 @@ ApplicationManager.prototype.cleanupApplication = function(token, onlyDevice) {
       application["browser"].close();
     }
     delete this.applications[token];
+    this.tokenGenerator.free(token);
   }
 };
 
+// Handles BROWSER_CONNECT messages.
+// This will generate a token and send it back along the browser
+// websocket.
 ApplicationManager.prototype.handleBrowserConnect = function(ws) {
   var token = this.tokenGenerator.generate();
   this.applications[token] = {"browser": ws};
@@ -104,12 +115,16 @@ ApplicationManager.prototype.handleBrowserConnect = function(ws) {
   });
 };
 
+// Handles DEVICE_CONNECT messages.
+// This verifies that the token sent along the device websocket
+// is legal.
 ApplicationManager.prototype.handleDeviceConnect = function(ws, token) {
   var type;
-  if (token === undefined) {
+  if (token === undefined || !(token in this.applications)) {
     type = "ERROR";
   } else {
     type = "DEVICE_CONNECT_RESPONSE";
+    this.applications[token]["device"] = ws;
   }
   var response = {"type": type};
   var manager = this;
@@ -121,6 +136,8 @@ ApplicationManager.prototype.handleDeviceConnect = function(ws, token) {
   });
 };
 
+// Handles DEVICE_EVENT messages.
+// This forwards it to the browser websocket with the given token.
 ApplicationManager.prototype.handleDeviceEvent = function(token, payload) {
   if (token === undefined || payload === undefined) {
     return;
@@ -141,7 +158,8 @@ ApplicationManager.prototype.handleDeviceEvent = function(token, payload) {
 };
 
 // Start the websocket server on the same port
-var manager = new ApplicationManager();
+var tokenGenerator = new TokenGenerator();
+var manager = new ApplicationManager(tokenGenerator);
 var wss = new WebSocketServer({server: server});
 wss.on('connection', function(ws) {
   console.log('websocket open');
