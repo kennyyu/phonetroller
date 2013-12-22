@@ -29,6 +29,7 @@ $(document).ready(function() {
         var link = location.origin + "/device.html?token=" + data["token"];
         $("#token").html("TOKEN: " + data["token"] + "<br>" +
                          "Visit: <a href='" + link + "'>" + link + "</a>");
+        new QRCode(document.getElementById("qrcode"), link);
         break;
       case "DEVICE_EVENT":
         ball.updateAcceleration(data["payload"]);
