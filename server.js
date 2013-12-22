@@ -22,13 +22,21 @@ console.log("http server listening on port %d", port);
 // Start the websocket server on the same port
 var wss = new WebSocketServer({server: server});
 wss.on('connection', function(ws) {
+  console.log('websocket open');
   ws.on('message', function(message) {
     console.log('received: %s', message);
   });
-  ws.send('food', function(error) {
-    if (error != null) {
-      console.log('error: %s', error);
-    }
+  var id = setInterval(function() {
+    ws.send(JSON.stringify(new Date()), function(error) {
+      if (error != null) {
+        console.log('websocket error: %s', error);
+        clearInterval(id);
+      }
+    });
+  }, 1000);
+  ws.on('close', function() {
+    console.log("websocket close");
+    clearInterval(id);
   });
 });
 
