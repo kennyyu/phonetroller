@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!DOCTYPE>
 <html>
   <head>
     <title>Move the Ball</title>
@@ -6,19 +6,13 @@
     <meta name="viewport" content="width=device-width,user-scalable=no" />
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
     <script src="js/ball.js"></script>
-    <style>
-      #no {
-        display: none;
-      }
-    </style>
   </head>
-
   <body>
     <div id="content">
       <div id="yes">
         <p>YES</p>
       </div>
-      <div id="no">
+      <div id="no" style="display: none;">
         <p>NO</p>
       </div>
     </div>
@@ -43,7 +37,7 @@
             };
             console.log("acceleration: %s", motion);
             ball.updateAcceleration(motion);
-          }
+          };
 
           setInterval(function() {
             ball.updatePosition();
