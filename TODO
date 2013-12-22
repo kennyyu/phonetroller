@@ -1,0 +1,16 @@
+index
+* ball.js -> index.js
+* just have a ball
+* make websocket connection, get token back
+* give URL
+* make UUIDs as tokens
+* phonetroller....com/device.html?token=19283u12
+* generate QR code
+
+device.html
+* parse token query param
+* open web socket
+* associate device with token
+* ondevicemotion --> serialize as json to server --> forward
+      to browsers listening on that device
+      ---> unserialize json and react
