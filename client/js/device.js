@@ -50,9 +50,9 @@ $(document).ready(function() {
             "type": "DEVICE_EVENT",
             "token": token,
             "payload": {
-              "ax": event.accelerationIncludingGravity.x,
-              "ay": event.accelerationIncludingGravity.y,
-              "az": event.accelerationIncludingGravity.z,
+              "ax": event.acceleration.x,
+              "ay": event.acceleration.y,
+              "az": event.acceleration.z,
             }
           };
           ws.send(JSON.stringify(motion));
