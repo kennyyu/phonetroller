@@ -1,7 +1,7 @@
 <!DOCTYPE>
 <html>
   <head>
-    <title>Move the Ball</title>
+    <title>Phonetroller</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <meta name="viewport" content="width=device-width,user-scalable=no" />
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
@@ -9,41 +9,6 @@
     <script src="js/index.js"></script>
   </head>
   <body>
-    <div id="content">
-      <div id="yes">
-        <p>YES</p>
-      </div>
-      <div id="no" style="display: none;">
-        <p>NO</p>
-      </div>
-    </div>
-    <script>
-      $(document).ready(function() {
-        var delay = 10;
-        var vMultiplier = 0.15;
-        var size = 20;
-        var color = "red";
-        var ball = new Ball(size, color, vMultiplier,
-          document.getElementById('yes'));
-
-        if (window.DeviceMotionEvent == undefined) {
-          document.getElementById("no").style.display="block";
-          document.getElementById("yes").style.display="none";
-        } else {
-          window.ondevicemotion = function(event) {
-            var motion = {
-              'ax': event.accelerationIncludingGravity.x,
-              'ay': event.accelerationIncludingGravity.y,
-              'az': event.accelerationIncludingGravity.z,
-            };
-            ball.updateAcceleration(motion);
-          };
-
-          setInterval(function() {
-            ball.updatePosition();
-          }, delay);
-        }
-      });
-    </script>
+    <div id="content"></div>
   </body>
 </html>

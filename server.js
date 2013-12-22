@@ -27,7 +27,13 @@ wss.on('connection', function(ws) {
     console.log('received: %s', message);
   });
   var id = setInterval(function() {
-    ws.send(JSON.stringify(new Date()), function(error) {
+    var data = {
+      "date": new Date(),
+      "ax": 1.0,
+      "ay": 2.0,
+      "az": 0.0
+    };
+    ws.send(JSON.stringify(data), function(error) {
       if (error != null) {
         console.log('websocket error: %s', error);
         clearInterval(id);
