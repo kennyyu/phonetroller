@@ -22,14 +22,14 @@ console.log("http server listening on port %d", port);
 
 // Start the websocket server on the same port
 var tokenGenerator = new manager.TokenGenerator();
-var appmanager = new manager.ApplicationManager(tokenGenerator);
+var devicemanager = new manager.DeviceManager(tokenGenerator);
 var wss = new WebSocketServer({server: server});
 wss.on('connection', function(ws) {
   console.log('websocket open');
 
   ws.on('message', function(message) {
     console.log('received: %s', message);
-    appmanager.handleMessage(ws, message);
+    devicemanager.handleMessage(ws, message);
   });
 
   ws.on('close', function() {
