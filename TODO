@@ -14,3 +14,17 @@ device.html
 * ondevicemotion --> serialize as json to server --> forward
       to browsers listening on that device
       ---> unserialize json and react
+
+APP
+* move maps
+* use ball as cursor
+* add buttons to device homepage
+* chrome extension?
+* powerpoint app
+* graffiti
+
+EVENT TYPES
+* BROWSER_CONNECT (contains token) [server -> browser]
+* DEVICE_CONNECT (contains token) [device -> server]
+* DEVICE_MOTION (contains token and motion) [device -> server -> browser]
+* DEVICE_BUTTON [device -> server -> browser]
