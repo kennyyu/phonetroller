@@ -19,30 +19,33 @@ var server = http.createServer(app);
 server.listen(port);
 console.log("http server listening on port %d", port);
 
+// TODO: assign each connection a token, and use {}
+// when that connection closes, remove it
+var allws = [];
+
 // Start the websocket server on the same port
 var wss = new WebSocketServer({server: server});
 wss.on('connection', function(ws) {
   console.log('websocket open');
+  allws.push(ws);
+
   ws.on('message', function(message) {
     console.log('received: %s', message);
-  });
-  var id = setInterval(function() {
-    var data = {
-      "date": new Date(),
-      "ax": 1.0,
-      "ay": 2.0,
-      "az": 0.0
-    };
-    ws.send(JSON.stringify(data), function(error) {
-      if (error != null) {
-        console.log('websocket error: %s', error);
-        clearInterval(id);
+    for (var i in allws) {
+      if (allws[i] == ws) {
+        continue;
       }
-    });
-  }, 1000);
+      allws[i].send(message, function(error) {
+        if (error != null) {
+          console.log('websocket error: %s', error);
+          allws[i].close();
+        }
+      });
+    }
+  });
+
   ws.on('close', function() {
     console.log("websocket close");
-    clearInterval(id);
   });
 });
 

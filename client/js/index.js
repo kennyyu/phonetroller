@@ -18,7 +18,7 @@ $(document).ready(function() {
     console.log("websocket open to %s", host);
   };
   ws.onmessage = function(event) {
-    $('#content').append('<p>' + event.data + '</p>');
+    console.log(event.data);
     var motion = JSON.parse(event.data);
     ball.updateAcceleration(motion);
   };
@@ -26,23 +26,4 @@ $(document).ready(function() {
     console.log("websocket closed");
   };
 
-/*
-  if (window.DeviceMotionEvent == undefined) {
-    document.getElementById("no").style.display="block";
-    document.getElementById("yes").style.display="none";
-  } else {
-    window.ondevicemotion = function(event) {
-      var motion = {
-        'ax': event.accelerationIncludingGravity.x,
-        'ay': event.accelerationIncludingGravity.y,
-        'az': event.accelerationIncludingGravity.z,
-      };
-      ball.updateAcceleration(motion);
-    };
-
-    setInterval(function() {
-      ball.updatePosition();
-    }, delay);
-  }
-  */
 });
