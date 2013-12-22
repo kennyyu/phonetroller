@@ -16,11 +16,28 @@ $(document).ready(function() {
   var ws = new WebSocket(host);
   ws.onopen = function() {
     console.log("websocket open to %s", host);
+    var connectMessage = {
+      "type": "BROWSER_CONNECT",
+    };
+    ws.send(JSON.stringify(connectMessage));
   };
   ws.onmessage = function(event) {
     console.log(event.data);
-    var motion = JSON.parse(event.data);
-    ball.updateAcceleration(motion);
+    var data = JSON.parse(event.data);
+    switch (data["type"]) {
+      case "BROWSER_CONNECT_RESPONSE":
+        var link = location.origin + "/device.html?token=" + data["token"];
+        $("#token").html("TOKEN: " + data["token"] + "<br>" +
+                         "Visit: <a href='" + link + "'>" + link + "</a>");
+        break;
+      case "DEVICE_EVENT":
+        ball.updateAcceleration(data["payload"]);
+        break;
+      default:
+        console.log("unexpected message type: %s", data["type"]);
+        ws.close();
+        break;
+    }
   };
   ws.onclose = function() {
     console.log("websocket closed");
