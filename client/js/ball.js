@@ -65,7 +65,7 @@ Ball.prototype.updatePosition = function() {
   jdiv.animate({
     left: this.x + "px",
     top: this.y + "px",
-  }, 10);
+  }, 1);
 //  this.div.style["top"] = this.y + "px";
 //  this.div.style["left"] = this.x + "px";
 };
