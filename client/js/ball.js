@@ -61,6 +61,11 @@ Ball.prototype.updatePosition = function() {
     this.y = document.documentElement.clientHeight-20;
     this.vy = 0;
   }
-  this.div.style["top"] = this.y + "px";
-  this.div.style["left"] = this.x + "px";
+  var jdiv = $(this.div);
+  jdiv.animate({
+    left: this.x + "px",
+    top: this.y + "px",
+  }, 10);
+//  this.div.style["top"] = this.y + "px";
+//  this.div.style["left"] = this.x + "px";
 };
