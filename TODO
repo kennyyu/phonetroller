@@ -14,6 +14,7 @@ device.html
 * ondevicemotion --> serialize as json to server --> forward
       to browsers listening on that device
       ---> unserialize json and react
+* make thumb on device move ball
 
 APP
 * move maps
