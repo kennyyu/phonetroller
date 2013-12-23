@@ -53,7 +53,6 @@ $(document).ready(function() {
               "ax": event.acceleration.x,
               "ay": event.acceleration.y,
               "az": event.acceleration.z,
-              "dt": event.interval,
             }
           };
           ws.send(JSON.stringify(motion));
