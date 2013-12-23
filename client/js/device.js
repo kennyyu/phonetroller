@@ -74,8 +74,8 @@ $(document).ready(function() {
               "type": "DEVICE_EVENT",
               "token": token,
               "payload": {
-                "x": style.left,
-                "y": style.top,
+                "x": touch.clientX,
+                "y": touch.clientY,
                 "width": $(document).width(),
                 "height": $(document).height(),
               }
