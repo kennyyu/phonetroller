@@ -28,7 +28,7 @@ $(document).ready(function() {
       case "BROWSER_CONNECT_RESPONSE":
         var link = location.origin + "/device.html?token=" + data["token"];
         $("#token").html("TOKEN: " + data["token"] + "<br>" +
-                         "Visit: <a href='" + link + "'>" + link + "</a>");
+                         "Visit on your device: <a href='" + link + "'>" + link + "</a>");
         new QRCode(document.getElementById("qrcode"), link);
         break;
       case "DEVICE_EVENT":

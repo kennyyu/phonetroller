@@ -26,7 +26,7 @@ $(document).ready(function() {
     $("#yes").html("NO TOKEN PROVIDED");
     return;
   }
-  $("#yes").html("TOKEN PROVIDED: " + token);
+  $("#yes").html("TOKEN PROVIDED: " + token + "<br>Move your device to move the ball!");
 
   // create a websocket connection to send acceleration estimates
   var host = location.origin.replace(/^http/, 'ws');
