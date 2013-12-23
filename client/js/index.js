@@ -1,6 +1,6 @@
 $(document).ready(function() {
   var delay = 10;
-  var vMultiplier = 1.0; //0.05;
+  var vMultiplier = 0.8; //0.05;
   var size = 20;
   var color = 'red';
   var ball = new Ball(size, color, vMultiplier,
