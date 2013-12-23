@@ -33,7 +33,7 @@ $(document).ready(function() {
         break;
       case "DEVICE_EVENT":
         ball.updateAcceleration(data["payload"]);
-        ball.updatePosition();
+//        ball.updatePosition();
         break;
       default:
         console.log("unexpected message type: %s", data["type"]);

@@ -6,10 +6,24 @@
     <meta name="viewport" content="width=device-width,user-scalable=no" />
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
     <script src="js/device.js"></script>
+    <style>
+      #ball {
+        width: 20px;
+        height: 20px;
+        border-radius: 10px;
+        -webkit-radius: 10px;
+        background-color: "red";
+        position: "absolute";
+        top: 0px;
+        left: 0px;
+      }
+    </style>
   </head>
   <body>
     <div id="content">
-      <div id="yes"></div>
+      <div id="yes">
+        <div id="ball"></div>
+      </div>
       <div id="no" style="display: none;">
         DEVICE MOTION API NOT SUPPORTED
       </div>

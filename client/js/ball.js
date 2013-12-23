@@ -34,8 +34,10 @@ var Ball = function(size, color, vMultiplier, element) {
 // - ay (float)
 // - az (float)
 Ball.prototype.updateAcceleration = function(motion) {
-  this.ax = motion.ax;
-  this.ay = motion.ay;
+  this.div.style["top"] = parseInt($(document).height() * motion.y / motion.height);
+  this.div.style["left"] = parseInt($(document).width() * motion.x / motion.width);
+//  this.ax = motion.ax;
+//  this.ay = motion.ay;
 };
 
 // Update the ball's position

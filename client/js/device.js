@@ -45,6 +45,7 @@ $(document).ready(function() {
     switch (data["type"]) {
       case "DEVICE_CONNECT_RESPONSE":
         // catch motion events and send them on the websocket
+        /*
         window.ondevicemotion = function(event) {
           var motion = {
             "type": "DEVICE_EVENT",
@@ -57,6 +58,31 @@ $(document).ready(function() {
           };
           ws.send(JSON.stringify(motion));
         };
+        */
+        document.getElementById("ball").addEventListener("touchmove", function(event){
+          // Only deal with one finger    
+          if (event.touches.length == 1) { 
+            // Get the information for finger #1
+            var touch = event.touches[0];
+            // Find the style object for the node the drag started from
+            var style = touch.target.style; 
+            // Position the element under the touch point
+            style.position = "absolute"; 
+            style.left = touch.clientX + "px";
+            style.top = touch.clientY + "px";
+            var motion = {
+              "type": "DEVICE_EVENT",
+              "token": token,
+              "payload": {
+                "x": style.left,
+                "y": style.top,
+                "width": $(document).width(),
+                "height": $(document).height(),
+              }
+            };
+            ws.send(JSON.stringify(motion));
+          }
+        }, false);
         break;
       default:
         console.log("unexpected message type: %s", data["type"]);
