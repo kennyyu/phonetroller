@@ -1,6 +1,6 @@
 $(document).ready(function() {
-  var delay = 100;
-  var vMultiplier = 1.0; //0.05;
+  var delay = 10;
+  var vMultiplier = 0.01;
   var size = 20;
   var color = 'red';
   var ball = new Ball(size, color, vMultiplier,
@@ -33,7 +33,6 @@ $(document).ready(function() {
         break;
       case "DEVICE_EVENT":
         ball.updateAcceleration(data["payload"]);
-        ball.updatePosition();
         break;
       default:
         console.log("unexpected message type: %s", data["type"]);
