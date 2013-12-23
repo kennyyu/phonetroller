@@ -15,6 +15,7 @@ var Ball = function(size, color, vMultiplier, element) {
   this.ax = 0.0;
   this.ay = 0.0;
   this.vMultiplier = vMultiplier;
+  this.dt = 0.0;
 
   var div = document.createElement('div');
   div.style["width"] = this.size + "px";
@@ -36,14 +37,15 @@ var Ball = function(size, color, vMultiplier, element) {
 Ball.prototype.updateAcceleration = function(motion) {
   this.ax = motion.ax;
   this.ay = motion.ay;
+  this.dt = motion.dt;
 };
 
 // Update the ball's position
 Ball.prototype.updatePosition = function() {
-  this.vx = this.vx + this.ax;
-  this.vy = this.vy + -(this.ay);
-  this.x = parseInt(this.x + this.vx * this.vMultiplier);
-  this.y = parseInt(this.y + this.vy * this.vMultiplier);
+  this.vx = this.vx + (this.dt * this.ax);
+  this.vy = this.vy + (this.dt * -(this.ay));
+  this.x = parseInt(this.x + this.dt * this.vx * this.vMultiplier);
+  this.y = parseInt(this.y + this.dt * this.vy * this.vMultiplier);
 
   if (this.x < 0) {
     this.x = 0;
