@@ -1,5 +1,5 @@
 $(document).ready(function() {
-  var delay = 10;
+  var delay = 1;
   var vMultiplier = 0.05;
   var size = 20;
   var color = 'red';
