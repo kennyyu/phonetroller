@@ -1,15 +1,15 @@
 $(document).ready(function() {
-  var delay = 1;
-  var vMultiplier = 0.01;
+  var delay = 10;
+  var vMultiplier = 1.0; //0.05;
   var size = 20;
   var color = 'red';
   var ball = new Ball(size, color, vMultiplier,
     document.getElementById('content'));
 
   // update the position of the ball with current acceleration estimates
-  setInterval(function() {
-    ball.updatePosition();
-  }, delay);
+//  setInterval(function() {
+//    ball.updatePosition();
+//  }, delay);
 
   // create a websocket connection to receive acceleration estimates
   var host = location.origin.replace(/^http/, 'ws');
@@ -33,6 +33,7 @@ $(document).ready(function() {
         break;
       case "DEVICE_EVENT":
         ball.updateAcceleration(data["payload"]);
+        ball.updatePosition();
         break;
       default:
         console.log("unexpected message type: %s", data["type"]);
