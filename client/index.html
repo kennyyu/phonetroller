@@ -8,6 +8,19 @@
     <script src="js/ball.js"></script>
     <script src="js/index.js"></script>
     <script src="js/qrcode.min.js"></script>
+    <script src="js/physicsjs-full-0.5.3.min.js"></script>
+    <style>
+      body {
+        background: #121212;
+      }
+      .pjs-meta {
+        display: none;
+      }
+
+      #viewport {
+        border: 1px solid #666;
+      }
+    </style>
   </head>
   <body>
     <div id="content">
@@ -16,5 +29,6 @@
       <div id="token"></div>
       <div id="qrcode"></div>
     </div>
+    <canvas id="viewport" width="300" height="300"></canvas>
   </body>
 </html>
