@@ -44,8 +44,9 @@ Ball.prototype.updatePosition = function() {
   this.vy = this.vy + -(this.ay);
 //  this.x = parseInt(this.x + this.vx * this.vMultiplier);
 //  this.y = parseInt(this.y + this.vy * this.vMultiplier);
-  this.x = parseInt(this.x + this.ax);
-  this.y = parseInt(this.y - this.ay);
+  var multiplier = 10.0;
+  this.x = parseInt(this.x + multiplier * this.ax);
+  this.y = parseInt(this.y - multiplier * this.ay);
 
   if (this.x < 0) {
     this.x = 0;
