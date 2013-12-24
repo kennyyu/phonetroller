@@ -68,7 +68,7 @@ Physics(function(world){
         // subscribe to ticker to advance the simulation
         Physics.util.ticker.subscribe(function( time, dt ){
 
-                circle.state.acc = Physics.vector(ax * multiplier, -(ay * multiplier));
+                circle.state.acc = Physics.vector(-ax * multiplier, -ay * multiplier);
                 //console.log("%f %f %f %f", ax, ay, ax * multiplier, -ay * multiplier);
                 //.vector(0.0, 0.0);
                 circle.recalc();
