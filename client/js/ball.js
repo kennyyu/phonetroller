@@ -42,8 +42,10 @@ Ball.prototype.updateAcceleration = function(motion) {
 Ball.prototype.updatePosition = function() {
   this.vx = this.vx + this.ax;
   this.vy = this.vy + -(this.ay);
-  this.x = parseInt(this.x + this.vx * this.vMultiplier);
-  this.y = parseInt(this.y + this.vy * this.vMultiplier);
+//  this.x = parseInt(this.x + this.vx * this.vMultiplier);
+//  this.y = parseInt(this.y + this.vy * this.vMultiplier);
+  this.x = parseInt(this.x + this.ax);
+  this.y = parseInt(this.y - this.ay);
 
   if (this.x < 0) {
     this.x = 0;
