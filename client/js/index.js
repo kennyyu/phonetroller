@@ -55,7 +55,7 @@ Physics(function(world){
                               y: 30, // y-coordinate
                               vx: 0.0, // velocity in x-direction
                               vy: 0.0, // velocity in y-direction
-                              radius: 20
+                              radius: 20,
                               })
         world.add(circle);
 
@@ -68,7 +68,9 @@ Physics(function(world){
         // subscribe to ticker to advance the simulation
         Physics.util.ticker.subscribe(function( time, dt ){
 
-                circle.state.acc = Physics.vector(ax * multiplier, -ay * multiplier);
+                circle.state.acc = Physics.vector(ax * multiplier, -(ay * multiplier));
+                //console.log("%f %f %f %f", ax, ay, ax * multiplier, -ay * multiplier);
+                //.vector(0.0, 0.0);
                 circle.recalc();
                 world.step( time );
 
@@ -95,8 +97,8 @@ if (window.DeviceMotionEvent==undefined) {
     return;
 } else {
     window.ondevicemotion = function(event) {
-        ax = event.accelerationIncludingGravity.x;
-        ay = event.accelerationIncludingGravity.y;
+        //ax = event.accelerationIncludingGravity.x;
+        //ay = event.accelerationIncludingGravity.y;
         //ax = event.acceleration.x;
         //ay = event.acceleration.y;
     }
