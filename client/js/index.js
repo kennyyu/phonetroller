@@ -9,7 +9,7 @@ $(document).ready(function() {
 // Acceleration
 var ax = 0;
 var ay = 0;
-var multiplier = 0.001;
+var multiplier = 0.01;
 
 Physics(function(world){
 
